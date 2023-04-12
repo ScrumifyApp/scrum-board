@@ -34,12 +34,13 @@ const LoginPage = () => {
 };
 
 export const loginAction = async ({ request }) => {
+  console.log("he are in the loginAction")
   const { user, setUser } = userContext;
   const loginInfo = await request.formData()
   
   //need to pull data from DB and if authentication passed
   try {
-    fetch('/api/login', {
+    const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -50,7 +51,7 @@ export const loginAction = async ({ request }) => {
 
     console.log('in function body after fetch')
     console.log(res, typeof res);
-    const response = await JSON.parse(res);
+    const response = await res.json();
     console.log('after ')
     console.log("info we received from backend", response);
     
@@ -58,6 +59,10 @@ export const loginAction = async ({ request }) => {
       console.log('Login was successful!');
       await setUser(response.user); //doing this to make this response.user info accessible from userHomePage
       return redirect('/UserHomePage');
+    }
+
+    if (response.status === 'UserNotFound') {
+      return { error: 'Username was not Found' };
     }
 
     if (response.status === 'IncorrectPassword') {
