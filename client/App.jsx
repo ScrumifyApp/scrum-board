@@ -6,7 +6,7 @@ import LoginPage, { loginAction } from './pages/Login/LoginPage';
 import SignUpPage, { signupAction } from './pages/SignUp/SignUpPage';
 import UserHomePage from './pages/UserHome/UserHomePage';
 import ScrumBoard from './pages/ScrumBoard/ScrumBoardPage';
-
+import { userContext } from './context';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +29,7 @@ const router = createBrowserRouter(
   )
 )
 
-
+/* Old app structure
 function App2() {
 
   return (
@@ -41,22 +41,22 @@ function App2() {
     </>
   );
 }
-
+*/
 
 const App = () => {
 
-  // const [ user, setUser ] = useState('null');
+  const [ user, setUser ] = useState({});
   // const [ currentTrip, setCurrentTrip ] = useState('null');
-  // const userValue = { user, setUser };
+  const userValue = { user, setUser };
   // const currentTripValue = { currentTrip, setCurrentTrip };
   
   // Using these context providers with context.js provides a way to store data accessible to
   // all children components. This way we can query the database as little as possible.
   return (
-    // <userContext.Provider value={userValue}>
-    //   <tripContext.Provider value={currentTripValue}>
+    <userContext.Provider value={userValue}>
+    {/* //   <tripContext.Provider value={currentTripValue}> */}
         <RouterProvider router={router} />
-    //   </tripContext.Provider>
+    {/* //   </tripContext.Provider> */}
     // </userContext.Provider>
   )
 }
