@@ -88,8 +88,9 @@ export default function Forms({ storyList }) {
 				<textarea
 					id='story-desc'
 					name='story-desc'
-					onChange={(e) => setStoryDesc(e.target.value)}></textarea>
-				<select onChange={(e) => setStoryColor(e.target.value)}>
+					onChange={(e) => setStoryDesc(e.target.value)}
+					required></textarea>
+				<select onChange={(e) => setStoryColor(e.target.value)} required>
 					<option value='' hidden>
 						Choose Color
 					</option>
@@ -111,10 +112,11 @@ export default function Forms({ storyList }) {
 				<h3>New Task</h3>
 				<label htmlFor='task-desc'>Description</label>
 				<textarea
+					required
 					id='task-desc'
 					name='task-desc'
 					onChange={(e) => setTaskDesc(e.target.value)}></textarea>
-				<select onChange={(e) => setTaskColor(e.target.value)}>
+				<select onChange={(e) => setTaskColor(e.target.value)} required>
 					<option value='' hidden>
 						Choose Story
 					</option>
@@ -122,17 +124,19 @@ export default function Forms({ storyList }) {
 				</select>
 				<label htmlFor='task-owner'>Task Owner</label>
 				<input
+					required
 					id='task-owner'
 					name='task-owner'
 					type='text'
 					onChange={(e) => setTaskOwner(e.target.value)}></input>
 				<label htmlFor='task-diff'>Difficulty</label>
 				<input
+					required
 					id='task-diff'
 					name='task-diff'
 					type='number'
 					min='1'
-					max='5'
+					max='10'
 					onChange={(e) => setTaskDiff(e.target.value)}></input>
 				<input type='submit' value='Add Task' id='submit-task' />
 			</form>

@@ -36,7 +36,7 @@ scrumController.getStories = (req, res, next) => {
 scrumController.getTasks = (req, res, next) => {
 	const { team_id } = req.body;
 	const values = [team_id];
-	const queryStr = `SELECT * FROM "public"."task" AS t INNER JOIN  "public"."story" s 
+	const queryStr = `SELECT t.description, t.name, t.difficulty, t.status, t.story_id, t.task_id FROM "public"."task" AS t INNER JOIN "public"."story" s 
 	ON t.story_id = s.id
 	WHERE s.team_id = $1
 	`;
