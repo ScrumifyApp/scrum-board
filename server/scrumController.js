@@ -15,7 +15,7 @@ scrumController.getStories = (req, res, next) => {
 	//inner join
 	//select * from story where team_id = passed in team_id
 
-	db.query(queryStr)
+	db.query(queryStr, values)
 		.then((data) => {
 			console.log('getStories data: ', data.rows)
 			res.locals.stories = data.rows;
@@ -41,7 +41,7 @@ scrumController.getTasks = (req, res, next) => {
 	WHERE s.team_id = $1
 	`;
 	//inner join
-	db.query(queryStr)
+	db.query(queryStr, values)
 		.then((data) => {
 			console.log('getTask data: ', data.rows)
 			res.locals.tasks = data.rows;

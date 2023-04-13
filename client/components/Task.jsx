@@ -47,7 +47,7 @@ export default function Task({ task, id, color }) {
 			<div
 				style={{ display: 'flex', width: 100 + '%', justifyContent: 'center' }}>
 				<button type='button' onClick={() => deleteTask()}>
-					Delete
+					x
 				</button>
 			</div>
 		</div>
