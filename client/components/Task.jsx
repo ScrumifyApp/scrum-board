@@ -48,19 +48,11 @@ export default function Task({ task, id, color }) {
 				{task.difficulty}
 			</p>
 			<div
-<<<<<<< HEAD
-				style={{ display: 'flex', width: 100 + '%', justifyContent: 'center' }}>
-				<button type='button' onClick={() => deleteTask()}>
-					x
-				</button>
-			</div>
-=======
 				style={{
 					display: 'flex',
 					width: 100 + '%',
 					justifyContent: 'center',
 				}}></div>
->>>>>>> dev
 		</div>
 	);
 }
