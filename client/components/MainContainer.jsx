@@ -48,7 +48,16 @@ export default function MainContainer() {
 		fetch('/api/')
 			//add team id to request here
 			//make this a POST request
-			//include team_id
+			// , {
+			// 	method: 'POST',
+			// 	body: JSON.stringify({
+			// 		team_id: team_id
+			// 	}),
+			// 	headers: {
+			// 		'Content-type': 'application/json',
+			// 	},
+			// }
+			// //include team_id
 
 			.then((data) => data.json())
 			.then((data) => {

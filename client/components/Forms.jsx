@@ -88,7 +88,7 @@ export default function Forms({ storyList }) {
 					<option value='' hidden>
 						Choose Color
 					</option>
-					//these values should correspond to story_id in database
+					{/* these values should correspond to story_id in database */}
 					<option value='#ed7ec8'>Thistle</option>
 					<option value='#708c6c'>Zomp</option>
 					<option value='#a7cff2'>Uranian Blue</option>

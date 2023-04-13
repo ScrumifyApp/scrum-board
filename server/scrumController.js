@@ -3,18 +3,24 @@ const express = require('express');
 
 const scrumController = {};
 
-// GET STORIES
+// scrumController.getIds = (req, res, next) => {
+// 	const queryStr =`SELECT team_id FROM "public"."story"`
+// }
 
+// GET STORIES -----------------------------------------------------------------------------------------
 scrumController.getStories = (req, res, next) => {
-	const { team_id } = req.body;
-	const values = [team_id];
-	const queryStr = `SELECT * FROM "public"."story"
-					  WHERE team_id = $1`
+	// const { team_id } = req.body;
+	// const values = [team_id];
+	// console.log('team_id: ', team_id)
+	const queryStr = `
+	SELECT * FROM story`
 		//inner join
+		//WHERE team_id = $1`
 	//select * from story where team_id = passed in team_id
 
-	db.query(queryStr, values)
+	db.query(queryStr)
 		.then((data) => {
+			console.log('getStories data: ', data.rows)
 			res.locals.stories = data.rows;
 			return next();
 		})
@@ -30,16 +36,14 @@ scrumController.getStories = (req, res, next) => {
 
 // GET TASKS ------------------------------------------------------------------------------------------
 scrumController.getTasks = (req, res, next) => {
-	const { team_id } = req.body;
-	const values = [team_id];
-	const queryStr = `SELECT * FROM "public"."task"
-	FROM "public"."story" s INNER JOIN "public"."task" t
-	ON t.story_id = s.id
-	WHERE s.team_id = $1
-	`
+	// const { team_id } = req.body;
+	// const values = [team_id];
+	const queryStr = `
+	SELECT * FROM task`
 	//inner join
-	db.query(queryStr, values)
+	db.query(queryStr)
 		.then((data) => {
+			console.log('getTask data: ', data.rows)
 			res.locals.tasks = data.rows;
 			return next();
 		})

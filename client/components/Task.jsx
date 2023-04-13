@@ -84,7 +84,7 @@ export default function Task({ task }) {
 				<option value='done'>Done</option>
 			</select>
 			<div
-				style={{ display: 'flex', width: 100 + '%', justifyContent: 'center' }}>
+				style1={{ display: 'flex', width: 100 + '%', justifyContent: 'center' }}>
 				<button type='button' onClick={() => deleteTask(task.id)}>
 					Delete
 				</button>
