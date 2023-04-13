@@ -13,30 +13,73 @@ export default function Scrumboard({ storyList, taskList }) {
 	const toVerifyTasks = [];
 	const doneTasks = [];
 
-
+	const colorCode = {};
+	console.log(taskList, 'task list');
 	// const hello = taskList[1]
 	// console.log("id?", hello.id)
 	// DIVIDE TASKS BY STATUS
-	for (const el of taskList) {
-		// console.log(el)
-		if (el.status === 'backlog') {
-			backlogTasks.push(<Task key={el.id} task={el} />);
-		} else if (el.status === 'todo') {
-			todoTasks.push(<Task key={el.id} task={el} />);
-		} else if (el.status === 'inProgress') {
-			inProgTasks.push(<Task key={el.id} task={el} />);
-		} else if (el.status === 'toVerify') {
-			toVerifyTasks.push(<Task key={el.id} task={el} />);
-		} else if (el.status === 'done') {
-			doneTasks.push(<Task key={el.id} task={el} />);
+	const stories = [];
+	console.log(storyList, 'story list');
+	if (storyList) {
+		for (const el of storyList) {
+			stories.push(<Story key={el.id} story={el} />);
+			colorCode[el.id] = el.color;
+		}
+		console.log('color code', colorCode);
+	}
+	if (taskList) {
+		for (const el of taskList) {
+			// console.log(el)
+			if (el.status === 'backlog') {
+				backlogTasks.push(
+					<Task
+						key={el.id}
+						task={el}
+						id={el.task_id}
+						color={colorCode[el.story_id]}
+					/>
+				);
+			} else if (el.status === 'todo') {
+				todoTasks.push(
+					<Task
+						key={el.id}
+						task={el}
+						id={el.task_id}
+						color={colorCode[el.story_id]}
+					/>
+				);
+			} else if (el.status === 'inProgress') {
+				inProgTasks.push(
+					<Task
+						key={el.id}
+						task={el}
+						id={el.task_id}
+						color={colorCode[el.story_id]}
+					/>
+				);
+			} else if (el.status === 'toVerify') {
+				toVerifyTasks.push(
+					<Task
+						key={el.id}
+						task={el}
+						id={el.task_id}
+						color={colorCode[el.story_id]}
+					/>
+				);
+			} else if (el.status === 'done') {
+				doneTasks.push(
+					<Task
+						key={el.id}
+						task={el}
+						id={el.task_id}
+						color={colorCode[el.story_id]}
+					/>
+				);
+			}
 		}
 	}
 
 	// POPULATE ARRAY OF STORY COMPONENTS
-	const stories = [];
-	for (const el of storyList) {
-		stories.push(<Story key={el.id} story={el} />);
-	}
 
 	// const Arr = [backlogTasks,todoTasks,inProgTasks,toVerifyTasks,doneTasks,stories]
 	// for(let i = 0; i<Arr.length; i++){

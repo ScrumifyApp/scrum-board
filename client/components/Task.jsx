@@ -2,20 +2,10 @@ import React from 'react';
 import { useContext } from 'react';
 import { dragContext } from './MainContainer';
 
-export default function Task({ task }) {
+export default function Task({ task, id, color }) {
 	// MAKE PATCH REQUEST TO UPDATE TASK STATUS
 
 	const { handleOnDrag, getData } = useContext(dragContext);
-	const colorCoder = {
-		23: '#d96e62',
-		24: '#708c6c',
-		25: '#a7cff2',
-		26: '#e8b168',
-		27: '#4287f5',
-		29: '#dbabc6',
-		31: 'gray',
-		33: '#b991db',
-	};
 
 	function changeStatus(newStatus) {
 		fetch('/api/task', {
@@ -37,7 +27,7 @@ export default function Task({ task }) {
 	}
 
 	// MAKE DELTE REQUEST TO DELETE TASK
-	function deleteTask(id) {
+	function deleteTask() {
 		fetch(`/api/task/${id}`, {
 			method: 'DELETE',
 		})
@@ -51,14 +41,14 @@ export default function Task({ task }) {
 
 	// const classes = `task ${task.color}`;
 	const classes = 'task';
-	const styles = { backgroundColor: colorCoder[task.story_id] };
+	const styles = { backgroundColor: color };
 	// RENDER TASK COMPONENT
 	//
 	return (
 		<div
 			draggable
 			onDragStart={(e) => handleOnDrag(e)}
-			id={task.id}
+			id={id}
 			className={classes}
 			style={styles}>
 			<p>
@@ -85,7 +75,7 @@ export default function Task({ task }) {
 			</select>
 			<div
 				style={{ display: 'flex', width: 100 + '%', justifyContent: 'center' }}>
-				<button type='button' onClick={() => deleteTask(task.id)}>
+				<button type='button' onClick={() => deleteTask()}>
 					Delete
 				</button>
 			</div>
