@@ -22,6 +22,7 @@ body {
   flex-direction: column;
 }
 
+
 header {
   display: flex;
   justify-content: center;
@@ -35,6 +36,12 @@ h1 {
   font-family: 'Indie Flower', cursive;
   font-size: 3em;
   color: rgb(251, 248, 250);
+}
+
+h2 {
+  font-family: 'Indie Flower';
+  color: rgb(251, 248, 250);
+  font-size: 2.5em;
 }
 
 .mainContainer {
@@ -96,6 +103,7 @@ hr {
 }
 
 .story {
+  position: relative;
   padding: 10px;
   box-shadow: 2px 2px 5px rgb(0, 0, 0);
   margin-bottom: 20px;
@@ -104,8 +112,9 @@ hr {
 
 .task {
   display: flex;
+  position: relative;
   flex-flow: row wrap;
-  padding: 10px;
+  padding: 20px 15px;
   box-shadow: 2px 2px 5px rgb(0, 0, 0);
   margin-bottom: 20px;
   word-wrap: break-word;
@@ -171,4 +180,88 @@ hr {
 
 #noAccount {
   float: left
+}
+
+.login-container {
+  border: solid;
+  border-width: 1px;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+  text-align: center;
+  width: 600px;
+  margin: 100px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px grey;
+  background-color: rgba(19, 18, 19, 0.258)
+}
+
+.login-form {
+  align-self: center;
+  margin: 5px;
+}
+
+.login-form input {
+  margin: 5px;
+}
+
+.login-form button {
+  margin-top: 15px;
+  padding: 5px;
+  border-radius: 3px;
+
+}
+
+#create-team-div {
+  text-align: left;
+}
+
+#create-team-div input {
+  margin: 8px;
+}
+
+#create-team-div button {
+  width: 150px;
+}
+
+.team {
+  padding: 15px;
+}
+
+.team button {
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #b44fa04f;
+  font-size: 18px;
+  color: white;
+}
+
+.team button:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.delete {
+  position: absolute;
+  top: -10px;
+  right: 6px;
+  font-size: 14px;
+  color: rgb(66, 65, 65);
+  border: none;
+  background-color: transparent;
+}
+
+button.delete:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.div-delete {
+  position: relative;
+}
+
+button.delete.div-delete {
+  top: 0 !important;
 }
