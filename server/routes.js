@@ -4,7 +4,7 @@ const router = express.Router();
 
 const controller = require('./scrumController'); 
 // get tasks
-router.get('/', controller.getStories, controller.getTasks, (req, res) => {
+router.post('/', controller.getStories, controller.getTasks, (req, res) => {
   const result = {
     stories: res.locals.stories,
     tasks: res.locals.tasks

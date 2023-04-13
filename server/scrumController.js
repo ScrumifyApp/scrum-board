@@ -9,13 +9,10 @@ const scrumController = {};
 
 // GET STORIES -----------------------------------------------------------------------------------------
 scrumController.getStories = (req, res, next) => {
-	// const { team_id } = req.body;
-	// const values = [team_id];
-	// console.log('team_id: ', team_id)
-	const queryStr = `
-	SELECT * FROM story`
-		//inner join
-		//WHERE team_id = $1`
+	const { team_id } = req.body;
+	const values = [team_id];
+	const queryStr = `SELECT * FROM "public"."story" WHERE team_id = $1`;
+	//inner join
 	//select * from story where team_id = passed in team_id
 
 	db.query(queryStr)
@@ -25,8 +22,9 @@ scrumController.getStories = (req, res, next) => {
 			return next();
 		})
 		.catch((err) => {
+			console.log(err, 'stories error');
 			const errorObj = {
-				log: 'scrumController.getStories middleware error',
+				log: `scrumController.getStories middleware error: ${err.message}`,
 				status: 501,
 				message: 'Unable to fetch stories',
 			};
@@ -36,18 +34,22 @@ scrumController.getStories = (req, res, next) => {
 
 // GET TASKS ------------------------------------------------------------------------------------------
 scrumController.getTasks = (req, res, next) => {
-	// const { team_id } = req.body;
-	// const values = [team_id];
-	const queryStr = `
-	SELECT * FROM task`
+	const { team_id } = req.body;
+	const values = [team_id];
+	const queryStr = `SELECT * FROM "public"."task" AS t INNER JOIN  "public"."story" s 
+	ON t.story_id = s.id
+	WHERE s.team_id = $1
+	`;
 	//inner join
 	db.query(queryStr)
 		.then((data) => {
 			console.log('getTask data: ', data.rows)
 			res.locals.tasks = data.rows;
+			console.log('DATTTAAA ROWSSSSSSSSSS', data.rows);
 			return next();
 		})
 		.catch((err) => {
+			console.log(err, 'err');
 			const errorObj = {
 				log: 'scrumcontroller.getTasks middleware error',
 				status: 501,
@@ -60,12 +62,13 @@ scrumController.getTasks = (req, res, next) => {
 // ADD TASK -------------------------------------------------------------------------------------------
 scrumController.postTask = (req, res, next) => {
 	//change these values to match database
-	const { taskDesc, taskDiff, taskOwner, taskColor, story_id } = req.body;
-	const values = [taskDesc, taskDiff, taskOwner, taskColor, story_id, 'backlog'];
+	const { taskDesc, taskDiff, taskOwner, story_id, task_id } = req.body;
+	console.log('request body', req.body);
+	const values = [taskDesc, taskDiff, taskOwner, story_id, 'backlog', task_id];
 	console.log(values);
 	const queryString = `
-  INSERT INTO task (description, difficulty, name, color, story_id, status)
-  VALUES ($1, $2, $3, $4, $5, $6)`;
+  INSERT INTO task (description, difficulty, name, story_id, status, task_id)
+  VALUES ($1, $2, $3, $4, $5, $6 )`;
 
 	db.query(queryString, values)
 		.then((data) => {
@@ -105,14 +108,17 @@ scrumController.postStory = (req, res, next) => {
 // UPDATE TASK STATUS --------------------------------------------------------------------------------
 scrumController.updateTask = (req, res, next) => {
 	const { status, task_id } = req.body;
+	console.log(task_id);
 	const values = [status, task_id];
-	const queryString = `UPDATE task SET status = $1 WHERE id = $2`;
-
+	const queryString = `UPDATE task SET status = $1 WHERE task_id = $2 RETURNING *`;
+	console.log('status', status);
 	db.query(queryString, values)
 		.then((data) => {
+			console.log(data.rows);
 			return next();
 		})
 		.catch((err) => {
+			console.log('error', err);
 			const errorObj = {
 				log: 'scrumController.updateTask middleware error',
 				status: 501,
@@ -126,7 +132,7 @@ scrumController.updateTask = (req, res, next) => {
 scrumController.deleteTask = (req, res, next) => {
 	const id = req.params.id;
 	const values = [id];
-	const queryString = `DELETE FROM task WHERE id = $1`;
+	const queryString = `DELETE FROM task WHERE task_id = $1`;
 
 	db.query(queryString, values)
 		.then((data) => {
