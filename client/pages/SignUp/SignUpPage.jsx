@@ -16,9 +16,9 @@ const SignUpPage = () => {
   }, [data])
 
   return (
-    <div>
+    <div className="login-container">
       <h1>Create New Account</h1>
-      <Form method='post' action='/SignupPage'>
+      <Form method='post' action='/SignupPage' className='login-form'>
         <label>
           <span>New Username</span>
           <input type="username" name="username" required />

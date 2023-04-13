@@ -8,7 +8,7 @@ const ScrumBoardPage = () => {
   return (
     <>
       <header>
-        <h1>SCRUMMY</h1>
+        <h1>SCRUMIFY</h1>
       </header>
       <MainContainer />
     </>

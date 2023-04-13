@@ -19,17 +19,19 @@ export default function Story({ story }) {
 	}
 
 	// const classes = `story ${story.color}`;
-  const classes = 'story';
-  const styles = { "backgroundColor": story.color }
-  
+	const classes = 'story';
+	const styles = { backgroundColor: story.color };
 
-//<div className={classes} style={styles}>
+	//<div className={classes} style={styles}>
 	return (
 		<div className={classes} style={styles}>
-			<p>{story.description}</p>
-			<button type='button' onClick={() => deleteStory(story.id)}>
-				Delete
+			<button
+				type='button'
+				onClick={() => deleteStory(story.id)}
+				className='delete div-delete'>
+				x
 			</button>
+			<p>{story.description}</p>
 		</div>
 	);
 }

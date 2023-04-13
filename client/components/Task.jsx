@@ -32,24 +32,35 @@ export default function Task({ task, id, color }) {
 			id={id}
 			className={classes}
 			style={styles}>
+			<button className='delete' onClick={() => deleteTask()}>
+				x
+			</button>
 			<p>
-				<span className='task-label'>Task</span>
+				<span className='task-label'>Task:</span>
 				{task.description}
 			</p>
 			<p>
-				<span className='task-label'>Name</span>
+				<span className='task-label'>Name:</span>
 				{task.name}
 			</p>
 			<p>
-				<span className='task-label'>Difficulty</span>
+				<span className='task-label'>Difficulty:</span>
 				{task.difficulty}
 			</p>
 			<div
+<<<<<<< HEAD
 				style={{ display: 'flex', width: 100 + '%', justifyContent: 'center' }}>
 				<button type='button' onClick={() => deleteTask()}>
 					x
 				</button>
 			</div>
+=======
+				style={{
+					display: 'flex',
+					width: 100 + '%',
+					justifyContent: 'center',
+				}}></div>
+>>>>>>> dev
 		</div>
 	);
 }
