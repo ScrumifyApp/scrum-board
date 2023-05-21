@@ -9,7 +9,7 @@ userRouter.post('/create-team',
   userController.createTeam,
   userController.joinTeam,
   (req, res) => {
-    console.log('--Sending data from POST request from /api/user/create-team route--');
+    // console.log('--Sending data from POST request from /api/user/create-team route--');
     return res.status(200).json(res.locals);
   }
 );
@@ -18,7 +18,7 @@ userRouter.post('/create-team',
 userRouter.post('/join-team/:team_id',
 userController.joinTeam,
   (req, res) => {
-    console.log('--Sending data from POST request from /api/user/join-team route--');
+    // console.log('--Sending data from POST request from /api/user/join-team route--');
     return res.status(200).json(res.locals);
   }
 );

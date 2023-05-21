@@ -22,7 +22,7 @@ app.use('/api', router);
  * 404 handler
  */
 app.use((req, res) => {
-  console.log('We are in the catch all error handler');
+  console.log('Backend express server failed to send a response from other paths, sending 404');
   res.status(404).send('Not Found');
 });
 
@@ -40,6 +40,8 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, ()=> { console.log(`Listening on port ${PORT}...`); });
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}...`);
+});
 
 module.exports = app;

@@ -6,7 +6,7 @@ export default function Story({ story }) {
 	const { getData } = useContext(dragContext);
 	// MAKE DELTE REQUEST TO DELETE STORY
 	function deleteStory(id) {
-		console.log('sending deleteStory from Story.jsx');
+		// console.log('sending deleteStory from Story.jsx');
 		fetch(`/api/story/${id}`, {
 			method: 'DELETE',
 		})

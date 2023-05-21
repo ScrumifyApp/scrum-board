@@ -13,7 +13,6 @@ export default function MainContainer() {
 
 	useEffect(() => {
 		getData();
-		console.log('use effect');
 	}, []);
 
 	function newDragStatus(newStatus) {
@@ -29,7 +28,7 @@ export default function MainContainer() {
 			},
 		})
 			.then((data) => {
-				console.log('this should be updated task status', data);
+				// console.log('this should be updated task status', data);
 				getData();
 			})
 			.catch((err) => {
@@ -39,7 +38,7 @@ export default function MainContainer() {
 
 	function handleOnDrag(e) {
 		setDragId(e.target.id);
-		console.log('dragging this', e.target);
+		// console.log('dragging this', e.target);
 	}
 
 	function handleDrop(e) {
@@ -59,16 +58,16 @@ export default function MainContainer() {
 			body: JSON.stringify({ team_id: team }),
 		})
 			.then((data) => {
-				console.log(data, 'raw data');
+				// console.log(data, 'raw data');
 				return data.json();
 			})
 			.then((data) => {
-				console.log(data, 'this is the response from server');
+				// console.log(data, 'this is the response from server');
 				setStories(data.stories);
-				console.log(data.stories);
+				// console.log(data.stories);
 				setTasks(data.tasks);
-				//setTasks(data.status);
-				console.log(data.tasks);
+				// // setTasks(data.status);
+				// console.log(data.tasks);
 			})
 			.catch((err) => {
 				console.log({ err: `Error fetching task and story data: ${err}` });

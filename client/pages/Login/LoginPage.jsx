@@ -9,7 +9,7 @@ const LoginPage = () => {
 
 	useEffect(() => {
 		if (data && data.user !== undefined) {
-			console.log('in setter land');
+			// console.log('in setter land');
 			setUser(data.user);
 			return navigate('/UserHomePage');
 		}
@@ -56,16 +56,16 @@ export const loginAction = async ({ request }) => {
 			password: loginInfo.get('password'),
 		}),
 	});
-	console.log(res);
+	// console.log(res);
 	if (res.status === 200) {
-		console.log('in function body after fetch');
+		// console.log('in function body after fetch');
 
 		const response = await res.json();
-		console.log('after json parse');
-		console.log('info we received from backend', response);
-		console.log(response.user);
+		// console.log('after json parse');
+		// console.log('info we received from backend', response);
+		// console.log(response.user);
 		if (response.status === 'valid') {
-			console.log('Login was successful!');
+			// console.log('Login was successful!');
 			return { user: response.user };
 		}
 

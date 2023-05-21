@@ -14,18 +14,18 @@ export default function Scrumboard({ storyList, taskList }) {
 	const doneTasks = [];
 
 	const colorCode = {};
-	console.log(taskList, 'task list');
-	// const hello = taskList[1]
+	// console.log(taskList, 'task list');
+	// // const hello = taskList[1]
 	// console.log("id?", hello.id)
 	// DIVIDE TASKS BY STATUS
 	const stories = [];
-	console.log(storyList, 'story list');
+	// console.log(storyList, 'story list');
 	if (storyList) {
 		for (const el of storyList) {
 			stories.push(<Story key={el.id} story={el} />);
 			colorCode[el.id] = el.color;
 		}
-		console.log('color code', colorCode);
+		// console.log('color code', colorCode);
 	}
 	if (taskList) {
 		for (const el of taskList) {

@@ -35,12 +35,12 @@ const UserHomePage = () => {
 			}),
 		});
 
-		console.log('repsonse:', response);
+		// console.log('repsonse:', response);
 		if (response.status === 200) {
 			const res = await response.json();
 			//Updates global team context to the team_id that was just created
 			setTeam(res.team_id);
-			console.log('team_id:', res.team_id);
+			// console.log('team_id:', res.team_id);
 			//navigates to scrumboard
 			return navigate('/ScrumBoardPage');
 		}
@@ -58,7 +58,7 @@ const UserHomePage = () => {
 			alert('Please enter a team url before submitting');
 			return;
 		}
-		console.log('join team code:', joinTeamCode);
+		// console.log('join team code:', joinTeamCode);
 		//send a post request to the backend to add current context user to team from url
 		const response = await fetch(`/api/user/join-team/${joinTeamCode}`, {
 			method: 'POST',
@@ -68,15 +68,15 @@ const UserHomePage = () => {
 			body: JSON.stringify({ user_id: user.user_id }),
 		});
 
-		console.log('repsonse:', response);
+		// console.log('repsonse:', response);
 		if (response.status === 200) {
 			const res = await response.json();
 			//check variable sent back to see if add was successful
 			if (res.teamAdded) {
-				console.log(user.username, 'was successfully added to the team!');
+				// console.log(user.username, 'was successfully added to the team!');
 				//Updates global team context to the team_id that was just created
 				setTeam(res.team_id);
-				console.log('team_id:', res.team_id);
+				// console.log('team_id:', res.team_id);
 				//navigates to scrumboard
 				return navigate('/ScrumBoardPage');
 			}

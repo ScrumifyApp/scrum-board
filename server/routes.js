@@ -47,13 +47,13 @@ router.delete('/story/:id', controller.deleteStory, (req, res) => {
 
 //user login
 router.post('/login', controller.verifyUser, controller.getTeams, (req, res) => {
-	console.log('login working');
+	// console.log('login working');
 	res.status(200).json(res.locals);
 })
 
 //user signup
 router.post('/signup', controller.checkUsername, controller.createUser, (req, res) => {
-  console.log('signup working');
+  // console.log('signup working');
   res.status(200).json(res.locals);
 })
 
