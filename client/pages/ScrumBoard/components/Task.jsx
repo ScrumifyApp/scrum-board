@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { dragContext } from './MainContainer';
+import { dragContext } from '../../../context';
 
 export default function Task({ task, id, color }) {
 	// MAKE PATCH REQUEST TO UPDATE TASK STATUS

@@ -1,19 +1,34 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate, Form, useActionData } from 'react-router-dom';
-import { userContext } from '../../context';
+import { userContext, pageContext } from '../../context';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(userContext)
+  const { lastPage } = useContext(pageContext);
   const data = useActionData();
 
+  // Set lastPage to variable that will prevent automatic page jump if page has just loaded
   useEffect(() => {
-    if (data && data.user !== undefined) {
-      console.log('in setter land')
-      setUser(data.user)
+    lastPage.current = 'JustLoadedSignUp';
+  }, [])
+
+  useEffect(() => {
+    // Make sure the user has been set and they didn't just get to this page before navigating to UserHomePage
+    if (user !== null && lastPage.current === '/SignUpPage') {
       return navigate('/UserHomePage');
     }
-  }, [data])
+  }, [user]);
+
+  // After a user submits info and a valid response from the backend has been received, 
+  // this useEffect will set the user accordingly
+  useEffect(() => {
+    if (data?.user !== undefined) {
+      setUser(data.user)
+      // Update lastPage to this page on successful submission
+      lastPage.current = '/SignUpPage';
+    }
+  }, [data]);
 
   return (
     <div className="login-container">
@@ -42,7 +57,7 @@ export const signupAction = async ({ request }) => {
 
   //need to store username/password to DB, then
 
-  const res = await fetch('/api/signup', {
+  const res = await fetch('/api/user/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -51,17 +66,17 @@ export const signupAction = async ({ request }) => {
     })
   });
       
-  console.log(res);
+  // console.log(res);
   if (res.status === 200) {
         
-  console.log('in function body after fetch')
+  // console.log('in function body after fetch')
 
   const response = await res.json();
-  console.log('after json parse ')
-  console.log("info we received from backend", response);
-    console.log(response.user)
+  // console.log('after json parse ')
+  // console.log("info we received from backend", response);
+  // console.log(response.user)
   if (response.status === 'valid') {
-    console.log('Signup was successful!');
+    // console.log('Signup was successful!');
     return {user: response.user};
   }
 

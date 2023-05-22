@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import React from 'react';
-import { dragContext } from './MainContainer';
-import { teamContext } from '../context';
+import { teamContext, dragContext } from '../../../context';
 import { nanoid } from 'nanoid';
 
 export default function Forms({ storyList }) {
