@@ -1,12 +1,17 @@
-import React, { useState, useContext } from 'react';
-import { userContext, teamContext } from '../../context';
+import React, { useState, useContext, useEffect } from 'react';
+import { userContext, teamContext, pageContext } from '../../context';
 import MainContainer from './components/MainContainer';
 
 
 const ScrumBoardPage = () => {
   const { user } = useContext(userContext);
   const { team } = useContext(teamContext);
+  const { lastPage } = useContext(pageContext);
   const [teamName, setTeamName] = useState(findTeamName(user, team))
+
+  useEffect(() => {
+    lastPage.current = '/ScrumBoardPage';
+	}, []);
 
   return (
     <>

@@ -15,14 +15,16 @@ const UserHomePage = () => {
   
   // Set lastPage to variable that will prevent automatic page jump if page has just loaded
   useEffect(() => {
-    lastPage.current = 'JustLoadedUserHomePage';
+    if (lastPage.current !== '/ScrumBoardPage') {
+      lastPage.current = 'JustLoadedUserHomePage';
+    }
   }, [])
 
   // Navigate to ScrumBoardPage after team has successfully been updated from either 
   // creating a team, joining a team, or selecting an existing team
   useEffect(() => {
     // Make sure the team has been set and the user didn't just get to this page before navigating to scrumboard
-    if (team !== null && lastPage.current !== 'JustLoadedUserHomePage') {
+    if (team !== null && lastPage.current !== 'JustLoadedUserHomePage' && lastPage.current !== '/ScrumBoardPage') {
       return navigate('/ScrumBoardPage');
     }
   }, [team])
