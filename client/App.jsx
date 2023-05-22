@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
 import RootLayout from './layouts/RootLayout';
 import LoginPage, { loginAction } from './pages/Login/LoginPage';
 import SignUpPage, { signupAction } from './pages/SignUp/SignUpPage';
 import UserHomePage from './pages/UserHome/UserHomePage';
 import ScrumBoard from './pages/ScrumBoard/ScrumBoardPage';
-import { userContext, teamContext } from './context';
+import { userContext, teamContext, pageContext } from './context';
 
 
 const router = createBrowserRouter(
@@ -16,7 +16,7 @@ const router = createBrowserRouter(
         element={<LoginPage key='LoginPage' />}
         action={loginAction} />
       <Route
-        path='/SignupPage'
+        path='/SignUpPage'
         element={<SignUpPage key='SignupPage' />}
         action={signupAction} />
       <Route
@@ -31,17 +31,18 @@ const router = createBrowserRouter(
 
 const App = () => {
 
-  const [ user, setUser ] = useState({});
-  const [ team, setTeam ] = useState(0);
-  const userValue = { user, setUser };
-  const teamValue = { team, setTeam };
+  const [ user, setUser ] = useState(null);
+  const [team, setTeam] = useState(null);
+  const lastPage = useRef(null);
   
   // Using these context providers with context.js provides a way to store data accessible to
   // all children components. This way we can query the database as little as possible.
   return (
-    <userContext.Provider value={userValue}>
-      <teamContext.Provider value={teamValue}>
-        <RouterProvider router={router} />
+    <userContext.Provider value={{ user, setUser }}>
+      <teamContext.Provider value={{ team, setTeam }}>
+        <pageContext.Provider value={{lastPage}}>
+          <RouterProvider router={router} />
+          </pageContext.Provider>
        </teamContext.Provider>
      </userContext.Provider>
   )
