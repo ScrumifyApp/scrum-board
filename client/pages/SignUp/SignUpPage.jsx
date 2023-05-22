@@ -15,7 +15,7 @@ const SignUpPage = () => {
 
   useEffect(() => {
     // Make sure the user has been set and they didn't just get to this page before navigating to UserHomePage
-    if (user !== null && lastPage.current !== 'JustLoadedSignUp') {
+    if (user !== null && lastPage.current === '/SignUpPage') {
       return navigate('/UserHomePage');
     }
   }, [user]);

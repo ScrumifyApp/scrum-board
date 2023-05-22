@@ -24,7 +24,7 @@ const UserHomePage = () => {
   // creating a team, joining a team, or selecting an existing team
   useEffect(() => {
     // Make sure the team has been set and the user didn't just get to this page before navigating to scrumboard
-    if (team !== null && lastPage.current !== 'JustLoadedUserHomePage' && lastPage.current !== '/ScrumBoardPage') {
+    if (team !== null && lastPage.current === '/UserHomePage') {
       return navigate('/ScrumBoardPage');
     }
   }, [team])
