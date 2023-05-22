@@ -1,19 +1,32 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate, Form, Link, useActionData } from 'react-router-dom';
-import { userContext } from '../../context';
+import { userContext, pageContext } from '../../context';
 
 const LoginPage = () => {
 	const navigate = useNavigate();
-	const { user, setUser } = useContext(userContext);
+  const { user, setUser } = useContext(userContext);
+  const { lastPage } = useContext(pageContext);
 	const data = useActionData();
+  
+  // Set lastPage to variable that will prevent automatic page jump if page has just loaded
+  useEffect(() => {
+    lastPage.current = 'JustLoadedLogin'
+  }, [])
 
-	useEffect(() => {
-		if (data && data.user !== undefined) {
-			// console.log('in setter land');
-			setUser(data.user);
-			return navigate('/UserHomePage');
+  useEffect(() => {
+    // Make sure the user has been set and they didn't just get to this page before navigating to UserHomePage
+    if (user !== null && lastPage.current !== 'JustLoadedLogin') {
+      return navigate('/UserHomePage');
+    }
+  }, [user]);
+
+  useEffect(() => {
+		if (data?.user !== undefined) {
+      setUser(data.user);
+      // Update lastPage to this page on successful submission
+      lastPage.current = '/';
 		}
-	}, [data]);
+  }, [data]);
 
 	return (
 		<div className='login-container'>
@@ -37,7 +50,7 @@ const LoginPage = () => {
 			<div id='noAccount'>
 				<br></br>
 				<p>No account?</p>
-				<Link to='/SignupPage'> Sign up!</Link>
+				<Link to='/SignUpPage'> Sign up!</Link>
 			</div>
 		</div>
 	);
@@ -46,9 +59,9 @@ const LoginPage = () => {
 export const loginAction = async ({ request }) => {
 	const loginInfo = await request.formData();
 
-	//need to pull data from DB and if authentication passed
+	//need to pull data from DB and check to see if authentication passed
 
-	const res = await fetch('/api/login', {
+	const res = await fetch('/api/user/login', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
