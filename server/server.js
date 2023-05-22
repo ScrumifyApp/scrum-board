@@ -3,7 +3,7 @@ const express = require('express');
 
 const app = express();
 
-const router = require('./routes');
+const scrumRouter = require('./routes/scrumRouter');
 const userRouter = require('./routes/userRouter');
 
 const PORT = 3000;
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true}));
 
 app.use('/api/user', userRouter);
 
-app.use('/api', router);
+app.use('/api', scrumRouter);
 
 
 
