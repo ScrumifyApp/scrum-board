@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { dragContext } from './MainContainer';
+import { dragContext } from '../../../context';
 
 export default function Story({ story }) {
 	const { getData } = useContext(dragContext);

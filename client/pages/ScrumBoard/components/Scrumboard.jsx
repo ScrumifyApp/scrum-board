@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Story from './Story';
 import Task from './Task';
-import { dragContext } from './MainContainer';
+import { dragContext } from '../../../context';
 
 export default function Scrumboard({ storyList, taskList }) {
 	// TASKS BY STATUS

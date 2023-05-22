@@ -1,22 +1,20 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Scrumboard from './Scrumboard';
 import Forms from './Forms';
-import { userContext, teamContext } from '../context';
+import { dragContext } from '../../../context';
 
-export const dragContext = createContext();
 
-export default function MainContainer() {
+export default function MainContainer({user, team}) {
 	const [stories, setStories] = useState([]);
 	const [tasks, setTasks] = useState([]);
-	const [dragid, setDragId] = useState(0);
-	const { team } = useContext(teamContext);
+  const [dragid, setDragId] = useState(0);
 
-	useEffect(() => {
-		getData();
+  useEffect(() => {
+    getData();
 	}, []);
 
 	function newDragStatus(newStatus) {
-		console.log('new status', newStatus, dragid);
+		// console.log('new status', newStatus, dragid);
 		fetch('/api/task', {
 			method: 'PATCH',
 			body: JSON.stringify({
