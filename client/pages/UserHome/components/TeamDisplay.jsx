@@ -23,7 +23,10 @@ const TeamDisplay = ({ userTeamName, userTeamId }) => {
 	return (
 		<div key={userTeamId} className='team'>
 			<span>
-				<button onClick={() => selectTeam(userTeamId)}>{userTeamName}</button>
+        <button onClick={() => selectTeam(userTeamId)}>
+          {userTeamName}
+        </button>
+        <div>Join url: {userTeamId}</div>
 			</span>
 		</div>
 	);
