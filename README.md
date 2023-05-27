@@ -1,14 +1,15 @@
 Does your team ever feel the need to be able to visualize the tasks their given and the progress your team is making?
 Enter Scrummy! The new virtual scrumboard that all developers will want!
 
-Currently, this version does not allow for individual teams.
-A workaround would be for your team to create their own database and link to it within the scrumModels.js file.
+Current features include: 
+- User sign-up and login
+- A user home page which lists all of the teams you're a part of and the ability to join an existing team or create a new team
+- A team scrum board page where a user can:
+  - Create stories to describe the nature of a set of tasks
+  - Create tasks corresponding to a story
+  - Drag and drop tasks to update their current status
 
-Stretch goals:
-  Teams being able to access their own scrumboard without changing database link,
-  Bcrypt authentication,
-  Responsive styling,
-  Drag and drop feature for task components
-
-database URL: 	postgres://cotveney:BTLV945VDEY_9tcBZDk7tpLlgfhP81K1@lallah.db.elephantsql.com/cotveney
-password: BTLV945VDEY_9tcBZDk7tpLlgfhP81K1
+Future features:
+- Passwords stored using bcrypt
+- Responsive styling
+- Websocket integration allowing users to simultaneously log into the same team and see live updates from other users
