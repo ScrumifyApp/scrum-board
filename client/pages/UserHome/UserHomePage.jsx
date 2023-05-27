@@ -10,7 +10,6 @@ const UserHomePage = () => {
   const { lastPage } = useContext(pageContext);
 	const [joinTeamCode, setJoinTeamCode] = useState('');
 	const [newTeamName, setNewTeamName] = useState('');
-	const [teamArray, setTeamArray] = useState([]);
 	const navigate = useNavigate();
   
   // Set lastPage to variable that will prevent automatic page jump if page has just loaded
@@ -28,11 +27,6 @@ const UserHomePage = () => {
       return navigate('/ScrumBoardPage');
     }
   }, [team])
-
-	//Update teamArray displayed below after user has been loaded from global context
-	useEffect(() => {
-    setTeamArray(makeTeamArray(user?.userTeams));
-  }, [user]);
 
 
 	// Function executes when the user clicks the "Create New Team" button.
@@ -161,7 +155,7 @@ const UserHomePage = () => {
 			</div>
 			<div id='teams-container-div' className='login-container'>
 				<h2>Your Teams</h2>
-				{teamArray}
+				{makeTeamArray(user?.userTeams)}
 			</div>
 		</>
 	);
@@ -173,8 +167,23 @@ export default UserHomePage;
 function makeTeamArray(userTeamArray) {
 	if (!userTeamArray || userTeamArray.length === 0) {
 		return <div>Please create or join a team</div>;
-	}
-  return userTeamArray.map((userTeam) => {
+  }
+
+  // In the future, we'll sort this data in the backend. For now, we'll sort it before displaying
+  const sortedUserTeamArray = userTeamArray.slice();
+  sortedUserTeamArray.sort(compareByTeamId);
+
+  return sortedUserTeamArray.map((userTeam) => {
+    console.log(userTeam);
 		return <TeamDisplay userTeamName={userTeam.team_name} userTeamId={userTeam.id} />;
 	});
+}
+
+// Sorts teams by ascending team arrays
+function compareByTeamId(userTeamA, userTeamB) {
+  if (userTeamA.id <= userTeamB.id) {
+    return -1;
+  } else {
+    return 1;
+  }
 }
