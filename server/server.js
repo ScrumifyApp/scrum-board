@@ -3,7 +3,8 @@ const express = require('express');
 
 const app = express();
 
-const router = require('./routes');
+const scrumRouter = require('./routes/scrumRouter');
+const userRouter = require('./routes/userRouter');
 
 const PORT = 3000;
 
@@ -11,7 +12,9 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
-app.use('/api', router);
+app.use('/api/user', userRouter);
+
+app.use('/api', scrumRouter);
 
 
 
@@ -19,6 +22,7 @@ app.use('/api', router);
  * 404 handler
  */
 app.use((req, res) => {
+  console.log('Backend express server failed to send a response from other paths, sending 404');
   res.status(404).send('Not Found');
 });
 
@@ -36,6 +40,8 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, ()=> { console.log(`Listening on port ${PORT}...`); });
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}...`);
+});
 
 module.exports = app;

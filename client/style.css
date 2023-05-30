@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pacifico&display=swap');
 
+.drag {
+  height: 300px;
+}
 
 * {
   margin: 0;
@@ -9,7 +12,7 @@
 
 body {
   font-family: sans-serif;
-  background-image: linear-gradient(rgb(255, 0, 170, 1), rgba(255, 0, 170, 0));
+  background-image: linear-gradient(rgb(181, 119, 160), rgba(255, 0, 170, 0));
   color: rgb(0, 0, 0);
   height: 100vh;
 }
@@ -18,6 +21,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 
 header {
   display: flex;
@@ -31,7 +35,13 @@ header {
 h1 {
   font-family: 'Indie Flower', cursive;
   font-size: 3em;
-  color: rgb(255, 0, 170);
+  color: rgb(251, 248, 250);
+}
+
+h2 {
+  font-family: 'Indie Flower';
+  color: rgb(251, 248, 250);
+  font-size: 2.5em;
 }
 
 .mainContainer {
@@ -45,7 +55,8 @@ h1 {
   flex-direction: column;
 }
 
-#add-task, #add-story {
+#add-task,
+#add-story {
   display: flex;
   margin: 0 40px 40px 0;
   padding: 20px;
@@ -53,12 +64,14 @@ h1 {
   flex-direction: column;
   border: 10px ridge rgb(198, 198, 198);
   background-color: rgb(46, 46, 46);
-  color:rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 2px 2px 10px rgb(0, 0, 0);
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   margin-bottom: 10px;
 }
 
@@ -69,6 +82,7 @@ input, textarea, select {
   background-color: rgb(46, 46, 46);
   box-shadow: 2px 2px 10px rgb(0, 0, 0);
   padding: 20px;
+  width: 75%;
 }
 
 .column {
@@ -79,7 +93,7 @@ input, textarea, select {
 }
 
 h3 {
-  color:rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   text-align: center;
   margin-bottom: 10px;
 }
@@ -89,16 +103,27 @@ hr {
 }
 
 .story {
+  position: relative;
   padding: 10px;
   box-shadow: 2px 2px 5px rgb(0, 0, 0);
   margin-bottom: 20px;
+  border-radius: 5px;
 }
 
 .task {
-  padding: 10px;
+  display: flex;
+  position: relative;
+  flex-flow: row wrap;
+  padding: 20px 15px;
   box-shadow: 2px 2px 5px rgb(0, 0, 0);
   margin-bottom: 20px;
   word-wrap: break-word;
+  border-radius: 5px;
+}
+
+.task button {
+  margin-top: 10px;
+  padding: 3px;
 }
 
 .task-label {
@@ -130,4 +155,113 @@ hr {
 /* Vanilla */
 .r232g225b155 {
   background-color: rgb(232, 225, 155);
+}
+
+.pink {
+  background-color: pink;
+}
+
+.dryrose {
+  background-color: rgb(177, 75, 92);
+}
+
+.lilac {
+  background-color: rgb(186, 149, 198);
+}
+
+.gray {
+  background-color: rgb(171, 168, 168);
+}
+
+.nav-link {
+  color: dodgerblue;
+  margin: 15px;
+}
+
+#noAccount {
+  float: left
+}
+
+.login-container {
+  border: solid;
+  border-width: 1px;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+  text-align: center;
+  width: 600px;
+  margin: 100px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px grey;
+  background-color: rgba(19, 18, 19, 0.258)
+}
+
+.login-form {
+  align-self: center;
+  margin: 5px;
+}
+
+.login-form input {
+  margin: 5px;
+}
+
+.login-form button {
+  margin-top: 15px;
+  padding: 5px;
+  border-radius: 3px;
+
+}
+
+#create-team-div {
+  text-align: left;
+}
+
+#create-team-div input {
+  margin: 8px;
+}
+
+#create-team-div button {
+  width: 150px;
+}
+
+.team {
+  padding: 15px;
+}
+
+.team button {
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #b44fa04f;
+  font-size: 18px;
+  color: white;
+}
+
+.team button:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.delete {
+  position: absolute;
+  top: -10px;
+  right: 6px;
+  font-size: 14px;
+  color: rgb(66, 65, 65);
+  border: none;
+  background-color: transparent;
+}
+
+button.delete:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.div-delete {
+  position: relative;
+}
+
+button.delete.div-delete {
+  top: 0 !important;
 }
