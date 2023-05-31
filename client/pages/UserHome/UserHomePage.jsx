@@ -179,7 +179,7 @@ function makeTeamArray(userTeamArray) {
 	});
 }
 
-// Sorts teams by ascending team arrays
+// Sorts teams by ascending team Id
 function compareByTeamId(userTeamA, userTeamB) {
   if (userTeamA.id <= userTeamB.id) {
     return -1;

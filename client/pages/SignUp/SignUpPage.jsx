@@ -54,9 +54,9 @@ const SignUpPage = () => {
 
 // This action function is called when the Form above is submitted (see router setup in App.jsx).
 export const signupAction = async ({ request }) => {
-  // Data from the form submission is available via the following message
+  // Data from the form submission is available via the following function
   const submitData = await request.formData();
-  // On submit, we need to send a post request to the backend with the proposed username and password
+  // On form submit, we need to send a post request to the backend with the proposed username and password
   const res = await fetch('/api/user/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
