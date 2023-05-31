@@ -8,8 +8,8 @@ Current features include:
   - Create stories to describe the nature of a set of tasks
   - Create tasks corresponding to a story
   - Drag and drop tasks to update their current status
+  - Passwords stored using bcrypt
 
 Future features:
-- Passwords stored using bcrypt
 - Responsive styling
 - Websocket integration allowing users to simultaneously log into the same team and see live updates from other users
