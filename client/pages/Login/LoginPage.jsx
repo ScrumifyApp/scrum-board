@@ -20,6 +20,8 @@ const LoginPage = () => {
     }
   }, [user]);
 
+  // After a user submits info and a valid response from the backend has been received, 
+  // this useEffect will set the user accordingly and update lastPage to a value that allows navigation away from login
   useEffect(() => {
 		if (data?.user !== undefined) {
       setUser(data.user);
@@ -56,11 +58,11 @@ const LoginPage = () => {
 	);
 };
 
+// This action function is called when the Form above is submitted (see router setup in App.jsx).
 export const loginAction = async ({ request }) => {
+  // Data from the form submission is available via the following function
 	const loginInfo = await request.formData();
-
-	//need to pull data from DB and check to see if authentication passed
-
+  // On form submit, we need to send a post request to the backend with the proposed username and password
 	const res = await fetch('/api/user/login', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -69,32 +71,25 @@ export const loginAction = async ({ request }) => {
 			password: loginInfo.get('password'),
 		}),
 	});
-	// console.log(res);
-	if (res.status === 200) {
-		// console.log('in function body after fetch');
 
-		const response = await res.json();
-		// console.log('after json parse');
-		// console.log('info we received from backend', response);
-		// console.log(response.user);
+  // If the request repsonse has status 200, convert the response back to JS from JSON and proceed 
+  if (res.status === 200) {
+    const response = await res.json();
+    
 		if (response.status === 'valid') {
 			// console.log('Login was successful!');
 			return { user: response.user };
 		}
 
-		if (
-			response.status === 'IncorrectPassword' ||
-			response.status === 'UserNotFound'
-		) {
+		if (response.status === 'IncorrectPassword' || response.status === 'UserNotFound') {
 			return { error: 'Username password combination was not valid' };
-		}
-
-		return {
-			error: `The status "${response.status}" sent in the response doesn't match the valid cases.`,
-		};
-	}
-
-	return { error: 'The server responded with a status other than 200' };
+    }
+    
+    // Included for dev testing, only appears if response.status string in the frontend and backend are misaligned 
+		return { error: `The status "${response.status}" sent in the response doesn't match the valid cases.` };
+  }
+  // If the response wasn't 200, let the user know they need to try again later
+  return { error: 'The server was unresponsive. Please try again later'};
 };
 
 export default LoginPage;
