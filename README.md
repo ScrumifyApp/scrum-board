@@ -8,7 +8,7 @@ Current features include:
   - Create stories to describe the nature of a set of tasks
   - Create tasks corresponding to a story
   - Drag and drop tasks to update their current status
-  - Passwords stored using bcrypt
+  - Passwords stored and verified using bcrypt
 
 Future features:
 - Responsive styling
