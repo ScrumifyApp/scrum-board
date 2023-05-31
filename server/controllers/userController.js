@@ -1,4 +1,6 @@
 const db = require('../scrumBoardModel');
+const bcrypt = require('bcryptjs');
+const saltRound = 10;
 
 const userController = {};
 
@@ -40,8 +42,9 @@ userController.createUser = (req, res, next) => {
 		// console.log('username matched, not actually creating new user');
 		return next();
 	}
-	const { newUser } = res.locals;
-	const values = [newUser.username, newUser.password];
+  const { newUser } = res.locals;
+  const hashedPassword = bcrypt.hashSync(newUser.password, saltRound);
+	const values = [newUser.username, hashedPassword];
 	const queryString = `INSERT INTO "public"."user" (username, password)
 	VALUES ($1, $2)
   RETURNING username, id AS user_id`;
@@ -82,13 +85,13 @@ userController.verifyUser = (req, res, next) => {
       
       // If we reach here, it means that the user was found in the database. 
       // Now we can check to see if the password is a match
-			const dbPass = data.rows[0].password;
-			if (dbPass !== password) {
+			const dbPassword = data.rows[0].password;
+			if (!bcrypt.compareSync(password, dbPassword)) {
 				res.locals.status = 'IncorrectPassword';
 				return next();
       } 
 
-      // If we reached here, dbPass must be strictly equal to the password. Therefore we'll send pertinent
+      // If we reached here, dbPassword must be strictly equal to the password. Therefore we'll send pertinent
       res.locals.user = {
         user_id: data.rows[0].id,
         username: data.rows[0].username
