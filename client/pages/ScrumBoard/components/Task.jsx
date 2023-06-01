@@ -1,8 +1,9 @@
 import React from 'react';
 import { useContext } from 'react';
 import { dragContext } from '../../../context';
+import { Draggable } from 'react-beautiful-dnd';
 
-export default function Task({ task, id, color }) {
+export default function Task({ task, id, color, index }) {
 	// MAKE PATCH REQUEST TO UPDATE TASK STATUS
 
 	const { handleOnDrag, getData } = useContext(dragContext);
@@ -26,33 +27,40 @@ export default function Task({ task, id, color }) {
 	// RENDER TASK COMPONENT
 	//
 	return (
-		<div
-			draggable
-			onDragStart={(e) => handleOnDrag(e)}
-			id={id}
-			className={classes}
-			style={styles}>
-			<button className='delete' onClick={() => deleteTask()}>
-				x
-			</button>
-			<p>
-				<span className='task-label'>Task:</span>
-				{task.description}
-			</p>
-			<p>
-				<span className='task-label'>Name:</span>
-				{task.name}
-			</p>
-			<p>
-				<span className='task-label'>Difficulty:</span>
-				{task.difficulty}
-			</p>
-			<div
-				style={{
-					display: 'flex',
-					width: 100 + '%',
-					justifyContent: 'center',
-				}}></div>
-		</div>
+		<Draggable draggableId={id} index={index}>
+			{(provided) => (
+				<div
+					// draggable
+					// onDragStart={(e) => handleOnDrag(e)}
+					id={id}
+					className={classes}
+					style={styles}
+					ref={provided.innerRef}
+					{...provided.dragHandleProps}
+					{...provided.draggableProps}>
+					<button className='delete' onClick={() => deleteTask()}>
+						x
+					</button>
+					<p>
+						<span className='task-label'>Task:</span>
+						{task.description}
+					</p>
+					<p>
+						<span className='task-label'>Name:</span>
+						{task.name}
+					</p>
+					<p>
+						<span className='task-label'>Difficulty:</span>
+						{task.difficulty}
+					</p>
+					<div
+						style={{
+							display: 'flex',
+							width: 100 + '%',
+							justifyContent: 'center',
+						}}></div>
+				</div>
+			)}
+		</Draggable>
 	);
 }

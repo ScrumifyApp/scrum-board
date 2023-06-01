@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Story from './Story';
 import Task from './Task';
 import { dragContext } from '../../../context';
+import Column from './Column';
 
 export default function Scrumboard({ stories, tasks }) {
 	// TASKS BY STATUS
@@ -22,7 +23,7 @@ export default function Scrumboard({ stories, tasks }) {
 				onDragOver={(e) => e.preventDefault()}>
 				<h3>Backlog</h3>
 				<hr />
-				{tasks?.backlog?.map((task) => {
+				{/* {tasks?.backlog?.map((task) => {
 					return (
 						<Task
 							key={task.id}
@@ -31,7 +32,7 @@ export default function Scrumboard({ stories, tasks }) {
 							color={colorCode[task.story_id]}
 						/>
 					);
-				})}
+				})} */}
 			</div>
 			<div
 				id='stories'
@@ -51,35 +52,33 @@ export default function Scrumboard({ stories, tasks }) {
 				onDragOver={(e) => e.preventDefault()}>
 				<h3>To Do</h3>
 				<hr />
-				{tasks?.todo?.map((task) => {
+				{/* {tasks?.inProgress?.map((task, index) => {
 					return (
 						<Task
 							key={task.id}
 							task={task}
 							id={task.task_id}
 							color={colorCode[task.story_id]}
+							index={index}
 						/>
 					);
-				})}
+				})} */}
 			</div>
-			<div
-				id='inProgress'
-				className='column'
-				onDrop={handleDrop}
-				onDragOver={(e) => e.preventDefault()}>
-				<h3>In Progress</h3>
-				<hr />
-				{tasks?.inProgress?.map((task) => {
+
+			<Column>
+				{tasks?.inProgress?.map((task, index) => {
 					return (
 						<Task
 							key={task.id}
 							task={task}
 							id={task.task_id}
 							color={colorCode[task.story_id]}
+							index={index}
 						/>
 					);
 				})}
-			</div>
+			</Column>
+
 			<div
 				id='toVerify'
 				className='column'
@@ -87,7 +86,7 @@ export default function Scrumboard({ stories, tasks }) {
 				onDragOver={(e) => e.preventDefault()}>
 				<h3>To Verify</h3>
 				<hr />
-				{tasks?.toVerify?.map((task) => {
+				{/* {tasks?.toVerify?.map((task) => {
 					return (
 						<Task
 							key={task.id}
@@ -96,7 +95,7 @@ export default function Scrumboard({ stories, tasks }) {
 							color={colorCode[task.story_id]}
 						/>
 					);
-				})}
+				})} */}
 			</div>
 			<div
 				id='done'
@@ -105,7 +104,7 @@ export default function Scrumboard({ stories, tasks }) {
 				onDragOver={(e) => e.preventDefault()}>
 				<h3>Done</h3>
 				<hr />
-				{tasks?.done?.map((task) => {
+				{/* {tasks?.done?.map((task) => {
 					return (
 						<Task
 							key={task.id}
@@ -114,7 +113,7 @@ export default function Scrumboard({ stories, tasks }) {
 							color={colorCode[task.story_id]}
 						/>
 					);
-				})}
+				})} */}
 			</div>
 		</div>
 	);

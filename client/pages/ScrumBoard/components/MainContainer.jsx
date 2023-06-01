@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Scrumboard from './Scrumboard';
 import Forms from './Forms';
 import { dragContext } from '../../../context';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 export default function MainContainer({ user, team }) {
 	const [stories, setStories] = useState([]);
@@ -75,18 +76,24 @@ export default function MainContainer({ user, team }) {
 			});
 	}
 
+	function handleDragEnd(result) {
+		console.log('end');
+	}
+
 	// RENDER MAINCONTAINER
 	return (
-		<dragContext.Provider
-			value={{
-				handleOnDrag,
-				handleDrop,
-				getData,
-			}}>
-			<div className='mainContainer'>
-				<Forms storyList={stories} />
-				<Scrumboard stories={stories} tasks={tasks} />
-			</div>
-		</dragContext.Provider>
+		<DragDropContext onDragEnd={handleDragEnd}>
+			<dragContext.Provider
+				value={{
+					handleOnDrag,
+					handleDrop,
+					getData,
+				}}>
+				<div className='mainContainer'>
+					<Forms storyList={stories} />
+					<Scrumboard stories={stories} tasks={tasks} />
+				</div>
+			</dragContext.Provider>
+		</DragDropContext>
 	);
 }
