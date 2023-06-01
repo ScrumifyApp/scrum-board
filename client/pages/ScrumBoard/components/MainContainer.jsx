@@ -56,13 +56,10 @@ export default function MainContainer({ user, team }) {
 			body: JSON.stringify({ team_id: team }),
 		})
 			.then((data) => {
-				// console.log(data, 'raw data');
 				return data.json();
 			})
 			.then(({ stories, tasks }) => {
-				// console.log(data, 'this is the response from server');
 				setStories(stories);
-				// console.log(data.stories);
 				const tasksList = {};
 				tasksList.backlog = tasks.filter((task) => task.status === 'backlog');
 				tasksList.todo = tasks.filter((task) => task.status === 'todo');
@@ -72,7 +69,6 @@ export default function MainContainer({ user, team }) {
 				tasksList.toVerify = tasks.filter((task) => task.status === 'toVerify');
 				tasksList.done = tasks.filter((task) => task.status === 'done');
 				setTasks(tasksList);
-				// // setTasks(data.status);
 			})
 			.catch((err) => {
 				console.log({ err: `Error fetching task and story data: ${err}` });
