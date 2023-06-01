@@ -3,7 +3,6 @@ const express = require('express');
 
 const scrumController = {};
 
-
 // GET STORIES ------------------------------------------------------------------------------------------
 scrumController.getStories = (req, res, next) => {
 	const { team_id } = req.body;
@@ -27,7 +26,6 @@ scrumController.getStories = (req, res, next) => {
 			return next(errorObj);
 		});
 };
-
 
 // GET TASKS ------------------------------------------------------------------------------------------
 scrumController.getTasks = (req, res, next) => {
@@ -55,7 +53,6 @@ scrumController.getTasks = (req, res, next) => {
 		});
 };
 
-
 // ADD TASK -------------------------------------------------------------------------------------------
 scrumController.postTask = (req, res, next) => {
 	//change these values to match database
@@ -65,10 +62,11 @@ scrumController.postTask = (req, res, next) => {
 	// console.log(values);
 	const queryString = `
   INSERT INTO task (description, difficulty, name, story_id, status, task_id)
-  VALUES ($1, $2, $3, $4, $5, $6 )`;
+  VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING *`;
 
 	db.query(queryString, values)
 		.then((data) => {
+			console.log(data);
 			return next();
 		})
 		.catch((err) => {
@@ -81,7 +79,6 @@ scrumController.postTask = (req, res, next) => {
 			return next(errorObj);
 		});
 };
-
 
 // ADD STORY -----------------------------------------------------------------------------------------
 scrumController.postStory = (req, res, next) => {
@@ -102,7 +99,6 @@ scrumController.postStory = (req, res, next) => {
 			return next(errorObj);
 		});
 };
-
 
 // UPDATE TASK STATUS --------------------------------------------------------------------------------
 scrumController.updateTask = (req, res, next) => {
@@ -127,7 +123,6 @@ scrumController.updateTask = (req, res, next) => {
 		});
 };
 
-
 // DELETE TASK -----------------------------------------------------------------------------------------
 scrumController.deleteTask = (req, res, next) => {
 	const id = req.params.id;
@@ -148,7 +143,6 @@ scrumController.deleteTask = (req, res, next) => {
 		});
 };
 
-
 // DELETE STORY ----------------------------------------------------------------------------------------
 scrumController.deleteStory = (req, res, next) => {
 	const id = req.params.id;
@@ -168,6 +162,5 @@ scrumController.deleteStory = (req, res, next) => {
 			return next(errorObj);
 		});
 };
-
 
 module.exports = scrumController;
