@@ -3,88 +3,15 @@ import Story from './Story';
 import Task from './Task';
 import { dragContext } from '../../../context';
 
-export default function Scrumboard({ storyList, tasks }) {
+export default function Scrumboard({ stories, tasks }) {
 	// TASKS BY STATUS
 	const { handleDrop } = useContext(dragContext);
-	// const backlogTasks = [];
-	// const todoTasks = [];
-	// const inProgTasks = [];
-	// const toVerifyTasks = [];
-	// const doneTasks = [];
-
 	const colorCode = {};
-	// console.log(taskList, 'task list');
-	// // const hello = taskList[1]
-	// console.log("id?", hello.id)
-	// DIVIDE TASKS BY STATUS
-	const stories = [];
-	// console.log(storyList, 'story list');
-	if (storyList) {
-		for (const el of storyList) {
-			stories.push(<Story key={el.id} story={el} />);
-			colorCode[el.id] = el.color;
-		}
-		// console.log('color code', colorCode);
-	}
-	// if (taskList) {
-	// 	for (const el of taskList) {
-	// 		// console.log(el)
-	// 		if (el.status === 'backlog') {
-	// 			backlogTasks.push(
-	// 				<Task
-	// 					key={el.id}
-	// 					task={el}
-	// 					id={el.task_id}
-	// 					color={colorCode[el.story_id]}
-	// 				/>
-	// 			);
-	// 		} else if (el.status === 'todo') {
-	// 			todoTasks.push(
-	// 				<Task
-	// 					key={el.id}
-	// 					task={el}
-	// 					id={el.task_id}
-	// 					color={colorCode[el.story_id]}
-	// 				/>
-	// 			);
-	// 		} else if (el.status === 'inProgress') {
-	// 			inProgTasks.push(
-	// 				<Task
-	// 					key={el.id}
-	// 					task={el}
-	// 					id={el.task_id}
-	// 					color={colorCode[el.story_id]}
-	// 				/>
-	// 			);
-	// 		} else if (el.status === 'toVerify') {
-	// 			toVerifyTasks.push(
-	// 				<Task
-	// 					key={el.id}
-	// 					task={el}
-	// 					id={el.task_id}
-	// 					color={colorCode[el.story_id]}
-	// 				/>
-	// 			);
-	// 		} else if (el.status === 'done') {
-	// 			doneTasks.push(
-	// 				<Task
-	// 					key={el.id}
-	// 					task={el}
-	// 					id={el.task_id}
-	// 					color={colorCode[el.story_id]}
-	// 				/>
-	// 			);
-	// 		}
-	// 	}
-	// }
 
-	// POPULATE ARRAY OF STORY COMPONENTS
+	stories?.forEach((story) => {
+		colorCode[story.id] = story.color;
+	});
 
-	// const Arr = [backlogTasks,todoTasks,inProgTasks,toVerifyTasks,doneTasks,stories]
-	// for(let i = 0; i<Arr.length; i++){
-	//   Arr[i].push(<div className='drag' key= 'hello' onDrop= {handleDrop} onDragOver={handleDragOver} ></div>)
-	// }
-	console.log(tasks, 'tasks');
 	// RENDER SCRUMBOARD
 	return (
 		<div className='scrumboard'>
@@ -113,7 +40,9 @@ export default function Scrumboard({ storyList, tasks }) {
 				onDragOver={(e) => e.preventDefault()}>
 				<h3>Stories</h3>
 				<hr />
-				{stories}
+				{stories.map((story) => {
+					return <Story key={story.id} story={story} />;
+				})}
 			</div>
 			<div
 				id='todo'

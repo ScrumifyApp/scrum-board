@@ -89,7 +89,7 @@ export default function MainContainer({ user, team }) {
 			}}>
 			<div className='mainContainer'>
 				<Forms storyList={stories} />
-				<Scrumboard storyList={stories} tasks={tasks} />
+				<Scrumboard stories={stories} tasks={tasks} />
 			</div>
 		</dragContext.Provider>
 	);
