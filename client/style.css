@@ -119,6 +119,7 @@ hr {
   margin-bottom: 20px;
   word-wrap: break-word;
   border-radius: 5px;
+  background-color: white;
 }
 
 .task button {

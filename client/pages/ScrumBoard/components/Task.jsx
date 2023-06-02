@@ -30,12 +30,10 @@ export default function Task({ task, id, color, index }) {
 		<Draggable draggableId={id} index={index}>
 			{(provided) => (
 				<div
-					// draggable
-					// onDragStart={(e) => handleOnDrag(e)}
 					id={id}
 					className={classes}
-					style={styles}
 					ref={provided.innerRef}
+					style={styles}
 					{...provided.dragHandleProps}
 					{...provided.draggableProps}>
 					<button className='delete' onClick={() => deleteTask()}>
