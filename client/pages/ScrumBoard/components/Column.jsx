@@ -1,14 +1,13 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 
-function Column({ id, children }) {
+function Column({ status, children }) {
 	return (
-		<Droppable droppableId='id'>
+		<Droppable droppableId={status}>
 			{(provided) => (
 				<div
 					ref={provided.innerRef}
 					{...provided.droppableProps}
-					id={id}
 					className='column'>
 					<h3>In Progress</h3>
 					<hr />
